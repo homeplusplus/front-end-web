@@ -9,6 +9,16 @@ import { FirebaseDatabaseMutation, FirebaseDatabaseNode } from '@react-firebase/
 const path = "user_emails";
 
 class HomePage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: null,
+            count: Math.floor((1555894800000 - (new Date()).getTime()) / 1000),
+            running: false,
+        }
+        this.handleStart()
+    }
+
     countProperties = (obj) => {
         var count = 0;
 
@@ -18,6 +28,19 @@ class HomePage extends React.Component{
         }
 
         return count;
+    }
+
+    handleChange = (event) => {
+        this.setState({ email: event.target.value });
+    }
+
+    handleStart() {
+        this.timer = setInterval(() => {
+            const newCount = this.state.count - 1;
+            this.setState(
+                { count: newCount >= 0 ? newCount : 0 }
+            );
+        }, 1000);
     }
 
     render(){
