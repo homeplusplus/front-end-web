@@ -30,12 +30,14 @@ const rejectStyle = {
 
 export default class InputDataPage extends React.Component {
     state = {
-        itemName: "",
-        itemSupplied: "",
-        monthPurchased: "",
-        spoiledItem: "",
+        name: "",
+        address: "",
+        phone: "",
+        all: {},
+        category: "",
         file: null,
-        oldFile: null
+        oldFile: null,
+        labelWidth: 0,
     }
 
     handleChange = name => event => {
@@ -56,34 +58,19 @@ export default class InputDataPage extends React.Component {
         });
     }
 
-    handleSumbmit = () => {
-        const { itemName, itemSupplied, monthPurchased, spoiledItem } = this.state;
-        let da = [
-            {
-                itemname: itemName,
-                itemssupplied: +itemSupplied,
-                monthpurchased: monthPurchased,
-                itemsspoiled: +spoiledItem,
-            }
-        ]
-        let json = JSON.stringify(da);
-        let post_data = { json_da: json };
-
-        axios.post('https://cors-anywhere.herokuapp.com/http://localhost:3000/users', {
-            post_data
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        this.setState({
-            itemName: "",
-            itemSupplied: "",
-            monthPurchased: "",
-            spoiledItem: ""
-        })
+    handleSumbmit = () => {       
+        console.log("Hello dsfdsf");
+        // let all = {
+        //     category: this.state.category : {
+        //         name: this.state.name,
+        //     } 
+        // }
+        // this.setState({
+        //     name: "",
+        //     address: "",
+        //     monthPurchased: "",
+        //     spoiledItem: ""
+        // })
     }
 
     render() {
@@ -138,12 +125,12 @@ export default class InputDataPage extends React.Component {
                                                     Category
                                                 </InputLabel>
                                                 <Select
-                                                    value={this.state.age}
-                                                    onChange={this.handleChange}
+                                                    value={this.state.category}
+                                                    onChange={this.handleChange('category')}
                                                     input={
                                                         <OutlinedInput
                                                             labelWidth={this.state.labelWidth}
-                                                            name="age"
+                                                            name="category"
                                                             id="outlined-age-simple"
                                                         />
                                                     }
@@ -158,8 +145,8 @@ export default class InputDataPage extends React.Component {
                                                 id="outlined-name"
                                                 label="Name"
                                                 className="input-text-field"
-                                                value={this.state.itemSupplied}
-                                                onChange={this.handleChange('itemSupplied')}
+                                                value={this.state.name}
+                                                onChange={this.handleChange('name')}
                                                 margin="normal"
                                                 variant="outlined"
                                             />
@@ -168,8 +155,8 @@ export default class InputDataPage extends React.Component {
                                                 id="outlined-name"
                                                 label="Address"
                                                 className="input-text-field"
-                                                value={this.state.monthPurchased}
-                                                onChange={this.handleChange('monthPurchased')}
+                                                value={this.state.address}
+                                                onChange={this.handleChange('address')}
                                                 margin="normal"
                                                 variant="outlined"
                                             />
@@ -178,8 +165,8 @@ export default class InputDataPage extends React.Component {
                                                 id="outlined-name"
                                                 label="Phone Number"
                                                 className="input-text-field"
-                                                value={this.state.spoiledItem}
-                                                onChange={this.handleChange('spoiledItem')}
+                                                value={this.state.phone}
+                                                onChange={this.handleChange('phone')}
                                                 margin="normal"
                                                 variant="outlined"
                                             />
@@ -192,7 +179,12 @@ export default class InputDataPage extends React.Component {
                                                     <button className="landing-button"
                                                         data-testid="test-push"
                                                         onClick={async () => {
-                                                            await runMutation({ email: "ntestaccount@gmail.com" });
+                                                            await this.handleSumbmit();
+                                                            await runMutation({ category: this.state.category,
+                                                                                name: this.state.name,
+                                                                                address: this.state.address,
+                                                                                phoneNumber: this.state.phone
+                                                                                });
                                                         }}
                                                     >
                                                         Submit
