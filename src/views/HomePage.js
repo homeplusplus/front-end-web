@@ -88,7 +88,10 @@ export default class HomePage extends React.Component{
                     <IconButton onClick={this.handleSubmit} color="primary" className="home-iconButton" aria-label="Directions">
                         <Arrow />
                     </IconButton>
-                </Paper>
+                </Paper> 
+                <p className="home-header" style={{marginTop:'5%'}}>
+                    Or text "Hi" to this number 1-408-409-8553 to get started! 
+                </p>
                 </Grid>
             </div>
             <div className="home-middle-paper">
