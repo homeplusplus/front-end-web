@@ -1,0 +1,34 @@
+{
+    "farms": [
+        {
+            "name":"This farm 1",
+            "phone":"408 799 2869"
+        },
+        {
+            "name":"This farm 2",
+            "phone":"408 799 2849"
+        },
+        {
+            "name":"This farm 3",
+            "phone":"408 799 2849"
+        } 
+    ],
+    "cards1":[
+        {
+            "icon":"1",
+            "header":"Minimize Monetary Losses",
+            "sentence":"A more accurate shipment forecast will reduce the number of wasted food items"
+        },   
+        {
+            "icon":"1",
+            "header":"Reduce Food Loss",
+            "sentence":"Track items that are more frequently wasted"
+        }, 
+        {
+            "icon":"1",
+            "header":"Gather Customer Behavior Insights",
+            "sentence":"Gather knowledge on which food items are sold and wasted"
+        }
+    ]
+}
+
