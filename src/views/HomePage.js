@@ -37,7 +37,7 @@ export default class HomePage extends React.Component{
         </div>
     )
 
-    rednerCards = (props, index) => (
+    renderCards = (props, index) => (
         <Paper key={index} className="home-paper-card">
             <Grid container direction="column" justify="space-evenly" style={{marginLeft: '10%'}}>
                 <DirectionsIcon style={{fontSize: 70, marginTop: '7%'}} />
@@ -53,9 +53,9 @@ export default class HomePage extends React.Component{
             <div>
             <div className="home-top-paper"> 
                 <Grid container direction="column" style={{paddingTop: '5%'}} alignItems="center">
-                <h1 className="home-header">Welcome to HomePP</h1>
+                <h1 className="home-header">Homeless?</h1>
                 <p className="home-header">
-                    Enter your phone number to start! 
+                    Enter your phone number for local resources! 
                 </p>
                 <Paper className="home-paper-search">
                     <IconButton className="home-iconButton" aria-label="Menu">
@@ -82,30 +82,30 @@ export default class HomePage extends React.Component{
             </div>
             <div className="home-middle-paper">
                 <Grid container direction="column" alignItems="center">
-                    <Typography variant='h3' style={{marginTop: '10%', color:'white'}}>HomePP's Key Benefits</Typography>
+                    <Typography variant='h3' style={{marginTop: '10%', color:'white'}}>How It Works</Typography>
                     <p className="home-middle-subheader">
-                        Something Here
+                        Helping the homeless one text at a time.
                     </p>
                     <Grid style={{marginTop: '10%'}} container direction="row" justify="space-evenly" alignItems="center">
                     <Paper className="home-paper-card">
                         <Grid container direction="column" justify="space-evenly" style={{marginLeft: '10%'}}>
                             <MoneyRounded style={{fontSize: 70, marginTop: '7%'}} />
-                            <Typography variant='h4' style={{marginTop: '7%'}}>Something Here</Typography>
-                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Something Here</Typography>
+                            <Typography variant='h4' style={{marginTop: '7%'}}>Homeless?</Typography>
+                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Provide a phone number or text us <br></br> directly for local resources.</Typography>
                         </Grid>
                     </Paper>
                     <Paper className="home-paper-card">
                         <Grid container direction="column" justify="space-evenly" style={{marginLeft: '10%'}}>
                             <DirectionsIcon style={{fontSize: 70, marginTop: '7%'}} />
-                            <Typography variant='h4' style={{marginTop: '7%'}}>Something Here</Typography>
-                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Something Here</Typography>
+                            <Typography variant='h4' style={{marginTop: '7%'}}>Want to Help?</Typography>
+                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Click on the organizers tab and provide <br></br> information about your event or resources.</Typography>
                         </Grid>
                     </Paper>
                     <Paper className="home-paper-card">
                         <Grid container direction="column" justify="space-evenly" style={{marginLeft: '10%'}}>
                             <ListIcon style={{fontSize: 70, marginTop: '7%'}} />
-                            <Typography variant='h4' style={{marginTop: '7%'}}>Something Here</Typography>
-                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Something Here</Typography>
+                            <Typography variant='h4' style={{marginTop: '7%'}}>Our Service</Typography>
+                            <Typography variant='subtitle1' style={{marginTop: '7%'}}>Home++ connects the homeless with local<br></br> resources through our text messaging service.</Typography>
                         </Grid>
                     </Paper>
                     </Grid>

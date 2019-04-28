@@ -78,9 +78,103 @@ export default class InputDataPage extends React.Component {
             <div>
                 <div className="input-top-paper">
                     <Grid container direction="column" style={{ paddingTop: '5%' }} alignItems="center">
-                        <h2 className="input-header"> Upload Your Data File</h2>
+                    <h2 className="input-header"> If you have a information that can help, share it here</h2>
+                        <Paper className="input-paper">
+                            <Grid container direction="column" justify="space-evenly" alignItems="center">
+                                <form className="input-form" noValidate autoComplete="off">
+
+                                    <Grid container direction="row" justify="space-around" alignItems="center">
+                                        <FormControl variant="outlined" style={{ marginTop: 9, width: 100 }}>
+                                            <InputLabel
+                                                ref={ref => {
+                                                    this.InputLabelRef = ref;
+                                                }}
+                                                htmlFor="outlined-age-simple"
+                                            >
+                                                Category
+                                            </InputLabel>
+                                            <Select
+                                                value={this.state.category}
+                                                onChange={this.handleChange('category')}
+                                                input={
+                                                    <OutlinedInput
+                                                        labelWidth={this.state.labelWidth}
+                                                        name="category"
+                                                        id="outlined-age-simple"
+                                                    />
+                                                }
+                                            >
+                                                <MenuItem value={"FOOD"}>Food</MenuItem>
+                                                <MenuItem value={"SHELTER"}>Shelter</MenuItem>
+                                                <MenuItem value={"Other"}>Other</MenuItem>
+                                            </Select>
+                                        </FormControl>
+
+                                        <TextField
+                                            id="outlined-name"
+                                            label="Name"
+                                            className="input-text-field"
+                                            value={this.state.name}
+                                            onChange={this.handleChange('name')}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+
+                                        <TextField
+                                            id="outlined-name"
+                                            label="Address"
+                                            className="input-text-field"
+                                            value={this.state.address}
+                                            onChange={this.handleChange('address')}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+
+                                        <TextField
+                                            id="outlined-name"
+                                            label="Phone Number"
+                                            className="input-text-field"
+                                            value={this.state.phone}
+                                            onChange={this.handleChange('phone')}
+                                            margin="normal"
+                                            variant="outlined"
+                                        />
+                                    </Grid>
+                                </form>
+                                <FirebaseDatabaseMutation type="push" path={path}>
+                                    {({ runMutation }) => {
+                                        return (
+                                            <div>
+                                                <button className="landing-button"
+                                                    data-testid="test-push"
+                                                    onClick={async () => {
+                                                        await this.handleSumbmit();
+                                                        await runMutation({ category: this.state.category,
+                                                                            name: this.state.name,
+                                                                            address: this.state.address,
+                                                                            phoneNumber: this.state.phone
+                                                                            });
+                                                    }}
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        );
+                                    }}
+                                </FirebaseDatabaseMutation>
+                                {/* <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSumbmit()}>
+                                    Submit
+                                </Button> */}
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                </div>
+                <div className="input-middle-paper">
+                    <div style={{ paddingTop: '7%' }}>        
+                        <Grid container alignItems="center" justify="center" >
+                        <h2 className="input-header"> If you have a flier, upload it here</h2>
                         <div className="middle-box">
-                            <Dropzone accept=".csv"
+                            <Dropzone accept=".pdf"
                                 onDrop={this.onDrop.bind(this)}>
                                 {({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles, rejectedFiles }) => {
                                     let styles = { ...baseStyle }
@@ -96,7 +190,7 @@ export default class InputDataPage extends React.Component {
                                             <div>
                                                 {isDragAccept ? 'Drop' : 'Drag'} files here or click to select files
                                         </div>
-                                            <p>Only *.csv file will be accepted</p>
+                                            <p>Only *.pdf file will be accepted</p>
                                             <img src={arrow_drop_down} className="drop-logo" alt="arrow_drop_down" />
                                             {isDragReject && <div>Unsupported file type...</div>}
                                         </div>
@@ -104,100 +198,7 @@ export default class InputDataPage extends React.Component {
                                 }}
                             </Dropzone>
                         </div>
-                        <h3 className="input-header" style={{ marginTop: '15%', color: 'white' }}> You can also enter your information manually here</h3>
-                    </Grid>
-                </div>
-                <div className="input-middle-paper">
-                    <div style={{ paddingTop: '7%' }}>        
-                        <Grid container alignItems="center" justify="center" >
-                            <Paper className="input-paper">
-                                <Grid container direction="column" justify="space-evenly" alignItems="center">
-                                    <form className="input-form" noValidate autoComplete="off">
-
-                                        <Grid container direction="row" justify="space-around" alignItems="center">
-                                            <FormControl variant="outlined" style={{ marginTop: 9, width: 100 }}>
-                                                <InputLabel
-                                                    ref={ref => {
-                                                        this.InputLabelRef = ref;
-                                                    }}
-                                                    htmlFor="outlined-age-simple"
-                                                >
-                                                    Category
-                                                </InputLabel>
-                                                <Select
-                                                    value={this.state.category}
-                                                    onChange={this.handleChange('category')}
-                                                    input={
-                                                        <OutlinedInput
-                                                            labelWidth={this.state.labelWidth}
-                                                            name="category"
-                                                            id="outlined-age-simple"
-                                                        />
-                                                    }
-                                                >
-                                                    <MenuItem value={"FOOD"}>Food</MenuItem>
-                                                    <MenuItem value={"SHELTER"}>Shelter</MenuItem>
-                                                    <MenuItem value={"Other"}>Other</MenuItem>
-                                                </Select>
-                                            </FormControl>
-
-                                            <TextField
-                                                id="outlined-name"
-                                                label="Name"
-                                                className="input-text-field"
-                                                value={this.state.name}
-                                                onChange={this.handleChange('name')}
-                                                margin="normal"
-                                                variant="outlined"
-                                            />
-
-                                            <TextField
-                                                id="outlined-name"
-                                                label="Address"
-                                                className="input-text-field"
-                                                value={this.state.address}
-                                                onChange={this.handleChange('address')}
-                                                margin="normal"
-                                                variant="outlined"
-                                            />
-
-                                            <TextField
-                                                id="outlined-name"
-                                                label="Phone Number"
-                                                className="input-text-field"
-                                                value={this.state.phone}
-                                                onChange={this.handleChange('phone')}
-                                                margin="normal"
-                                                variant="outlined"
-                                            />
-                                        </Grid>
-                                    </form>
-                                    <FirebaseDatabaseMutation type="push" path={path}>
-                                        {({ runMutation }) => {
-                                            return (
-                                                <div>
-                                                    <button className="landing-button"
-                                                        data-testid="test-push"
-                                                        onClick={async () => {
-                                                            await this.handleSumbmit();
-                                                            await runMutation({ category: this.state.category,
-                                                                                name: this.state.name,
-                                                                                address: this.state.address,
-                                                                                phoneNumber: this.state.phone
-                                                                                });
-                                                        }}
-                                                    >
-                                                        Submit
-                                                    </button>
-                                                </div>
-                                            );
-                                        }}
-                                    </FirebaseDatabaseMutation>
-                                    {/* <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSumbmit()}>
-                                        Submit
-                                    </Button> */}
-                                </Grid>
-                            </Paper>
+                        
                         </Grid>
                     </div>
                 </div>
