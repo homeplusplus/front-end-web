@@ -1,6 +1,11 @@
 
 .about-header{
     color: black;
+    margin-bottom: 5%;
+}
+
+.about-text{
+    margin-bottom: 15%;
 }
 
 .header-paper{

@@ -7,7 +7,8 @@ import axios from 'axios';
 
 // firebase
 import { FirebaseDatabaseMutation } from '@react-firebase/database';
-const path = "user_emails";
+var path = "food";
+
 
 const baseStyle = {
     width: 200,
@@ -40,6 +41,7 @@ export default class InputDataPage extends React.Component {
         labelWidth: 0,
     }
 
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -58,19 +60,14 @@ export default class InputDataPage extends React.Component {
         });
     }
 
-    handleSumbmit = () => {       
+    handleSubmit = () => {       
         console.log("Hello dsfdsf");
-        // let all = {
-        //     category: this.state.category : {
-        //         name: this.state.name,
-        //     } 
-        // }
-        // this.setState({
-        //     name: "",
-        //     address: "",
-        //     monthPurchased: "",
-        //     spoiledItem: ""
-        // })
+
+        this.setState({
+            name: "",
+            address: "",
+            phone: ""
+        })
     }
 
     render() {
@@ -148,12 +145,14 @@ export default class InputDataPage extends React.Component {
                                                 <button className="landing-button"
                                                     data-testid="test-push"
                                                     onClick={async () => {
-                                                        await this.handleSumbmit();
+                                                        
                                                         await runMutation({ category: this.state.category,
                                                                             name: this.state.name,
                                                                             address: this.state.address,
                                                                             phoneNumber: this.state.phone
                                                                             });
+                                                        await this.handleSubmit();
+
                                                     }}
                                                 >
                                                     Submit
@@ -162,7 +161,7 @@ export default class InputDataPage extends React.Component {
                                         );
                                     }}
                                 </FirebaseDatabaseMutation>
-                                {/* <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSumbmit()}>
+                                {/* <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSubmit()}>
                                     Submit
                                 </Button> */}
                             </Grid>

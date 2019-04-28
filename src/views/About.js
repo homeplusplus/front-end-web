@@ -36,7 +36,9 @@ export default class About extends React.Component {
         return (
             <div>
             <Grid container direction="column" style={{paddingTop: '5%'}} alignItems="center">
-                <h1 className="about-header">SO how do we work you might ask?</h1>
+                <h1 className="about-header">How does it work?</h1>
+                <p className="about-text">Home++ provides real time information about resources and events directly to the phones of the homeless.
+                </p>
                 </Grid>
             </div>
         )
