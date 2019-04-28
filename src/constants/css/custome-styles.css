@@ -173,3 +173,18 @@
     width: 140px;
     height: 70px;
 }
+
+.landing-button {
+    /* flex: 1; */
+    border-radius: 0;
+    margin-bottom: 0px;
+    height: 45px;
+    font-size: 16px;
+    font-weight: 300;
+    width: 200px;
+    text-transform: uppercase;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+  }

@@ -5,6 +5,10 @@ import arrow_drop_down from '../constants/svg/arrow_drop_down.svg'
 import papa from 'papaparse';
 import axios from 'axios';
 
+// firebase
+import { FirebaseDatabaseMutation } from '@react-firebase/database';
+const path = "user_emails";
+
 const baseStyle = {
     width: 200,
     height: 200,
@@ -117,14 +121,14 @@ export default class InputDataPage extends React.Component {
                     </Grid>
                 </div>
                 <div className="input-middle-paper">
-                    <div style={{ paddingTop: '7%' }}>      
+                    <div style={{ paddingTop: '7%' }}>        
                         <Grid container alignItems="center" justify="center" >
                             <Paper className="input-paper">
                                 <Grid container direction="column" justify="space-evenly" alignItems="center">
                                     <form className="input-form" noValidate autoComplete="off">
 
                                         <Grid container direction="row" justify="space-around" alignItems="center">
-                                            <FormControl variant="outlined" style={{marginTop: 9, width: 100}}>
+                                            <FormControl variant="outlined" style={{ marginTop: 9, width: 100 }}>
                                                 <InputLabel
                                                     ref={ref => {
                                                         this.InputLabelRef = ref;
@@ -181,9 +185,25 @@ export default class InputDataPage extends React.Component {
                                             />
                                         </Grid>
                                     </form>
-                                    <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSumbmit()}>
+                                    <FirebaseDatabaseMutation type="push" path={path}>
+                                        {({ runMutation }) => {
+                                            return (
+                                                <div>
+                                                    <button className="landing-button"
+                                                        data-testid="test-push"
+                                                        onClick={async () => {
+                                                            await runMutation({ email: "ntestaccount@gmail.com" });
+                                                        }}
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            );
+                                        }}
+                                    </FirebaseDatabaseMutation>
+                                    {/* <Button style={{ marginTop: 10, width: 200, color: 'black' }} variant="outlined" component="span" onClick={() => this.handleSumbmit()}>
                                         Submit
-                                </Button>
+                                    </Button> */}
                                 </Grid>
                             </Paper>
                         </Grid>
