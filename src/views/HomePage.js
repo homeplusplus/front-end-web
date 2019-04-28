@@ -1,54 +1,67 @@
 import React from 'react';
 import { Paper, Grid, Typography, IconButton, 
-        Divider, InputBase, List, ListItem, Avatar,
-        ListItemText
+        InputBase, Input
 } from '@material-ui/core';
 import Arrow from '@material-ui/icons/ArrowForwardRounded';
 import MoneyRounded from '@material-ui/icons/MoneyRounded';
 import ListIcon from '@material-ui/icons/List';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import ImageIcon from '@material-ui/icons/Image';
+import MaskedInput from 'react-text-mask';
+import axios from 'axios';
+
+// input form
+function TextMaskCustom(props) {
+    const { inputRef, ...other } = props;
+  
+    return (
+      <MaskedInput
+        {...other}
+        ref={ref => {
+          inputRef(ref ? ref.inputElement : null);
+        }}
+        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+        placeholderChar={'\u2000'}
+        showMask
+      />
+    );
+}
 
 export default class HomePage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            
+            phone: "",
+            textmask: '(1)    -    '
         }
     }
 
+    handleSubmit = () => {
+        const {phone} = this.state;
 
-
-    handleList = () => {
-        
+        axios({
+            headers: { 
+                'content-type': 'application/json'
+            },
+            method: 'post',
+            url: `http://localhost:3001/api/phone`,
+            params: {
+                phone
+            }
+        })
+        .then((response) => response.data)
+        .catch((error) => error);
     }
 
-    renderLists = (props) => (
-        <div key={props.shopid}>
-            <ListItem >
-                <Avatar>
-                    <ImageIcon />
-                </Avatar>
-            <ListItemText primary={props.address}/>
-            </ListItem>
-            <li>
-                <Divider variant="inset" />
-            </li>
-        </div>
-    )
-
-    rednerCards = (props, index) => (
-        <Paper key={index} className="home-paper-card">
-            <Grid container direction="column" justify="space-evenly" style={{marginLeft: '10%'}}>
-                <DirectionsIcon style={{fontSize: 70, marginTop: '7%'}} />
-                <Typography variant='h4' style={{marginTop: '7%'}}>{props.header}</Typography>
-                <Typography variant='subtitle1' style={{marginTop: '7%'}}>{props.sentence}</Typography>
-            </Grid>
-        </Paper>
-    )
+    handleChange = (event) => {
+        this.setState({ phone: event.target.value });
+        // this.setState({ textmask: event.target.value });
+        let y = this.state.textmask.replace(/^\|+\|(\|-\|)|\|+$/g, '');
+        console.log(this.state.phone);
+    }
 
     render(){
-        const { show } = this.state;
+        const { textmask } = this.state;
         return(
             <div>
             <div className="home-top-paper"> 
@@ -60,24 +73,22 @@ export default class HomePage extends React.Component{
                 <Paper className="home-paper-search">
                     <IconButton className="home-iconButton" aria-label="Menu">
                     </IconButton>
-                    <InputBase className="home-input" placeholder='e.g 1 407 452 1435' />
+                        {/* <Input
+                            value={textmask}
+                            onChange={this.handleChange}
+                            id="formatted-text-mask-input"
+                            inputComponent={TextMaskCustom}
+                        /> */}
+                    <InputBase className="home-input" onChange={this.handleChange} placeholder='e.g 1 407 452 1435' />
                     {/* <Typography className="home-input">Get your store recomendation</Typography> */}
                     {/* <Paper className="home-input-paper" square={true} onClick={() => console.log("click")}>
                         <h6 className="home-header" style={{marginTop: 10}}>Search</h6>
                     </Paper> */}
                     
-                    <IconButton onClick={this.handleList} color="primary" className="home-iconButton" aria-label="Directions">
+                    <IconButton onClick={this.handleSubmit} color="primary" className="home-iconButton" aria-label="Directions">
                         <Arrow />
                     </IconButton>
                 </Paper>
-                { 
-                    show && 
-                    <div style={{marginTop: 5}}>
-                        <List className="home-list">
-                            {this.state.data.map(farm => (this.renderLists(farm)))}
-                        </List>
-                    </div>  
-                }
                 </Grid>
             </div>
             <div className="home-middle-paper">
