@@ -61,8 +61,6 @@ export default class InputDataPage extends React.Component {
     }
 
     handleSubmit = () => {       
-        console.log("Hello dsfdsf");
-
         this.setState({
             name: "",
             address: "",
@@ -74,14 +72,14 @@ export default class InputDataPage extends React.Component {
         return (
             <div>
                 <div className="input-top-paper">
-                    <Grid container direction="column" style={{ paddingTop: '5%' }} alignItems="center">
+                    <Grid container direction="column" style={{ paddingTop: '10%' }} alignItems="center">
                     <h2 className="input-header"> If you have a information that can help, share it here</h2>
                         <Paper className="input-paper">
                             <Grid container direction="column" justify="space-evenly" alignItems="center">
                                 <form className="input-form" noValidate autoComplete="off">
 
                                     <Grid container direction="row" justify="space-around" alignItems="center">
-                                        <FormControl variant="outlined" style={{ marginTop: 9, width: 100 }}>
+                                        <FormControl variant="outlined" style={{ minWidth:50 , marginTop: 8, width: 100, paddingRight:5 }}>
                                             <InputLabel
                                                 ref={ref => {
                                                     this.InputLabelRef = ref;
@@ -116,16 +114,17 @@ export default class InputDataPage extends React.Component {
                                             margin="normal"
                                             variant="outlined"
                                         />
-
-                                        <TextField
-                                            id="outlined-name"
-                                            label="Address"
-                                            className="input-text-field"
-                                            value={this.state.address}
-                                            onChange={this.handleChange('address')}
-                                            margin="normal"
-                                            variant="outlined"
-                                        />
+                                        <div className="input-text-field-long">
+                                            <TextField
+                                                id="outlined-name"
+                                                label="Address"
+                                                className="input-text-field-long"
+                                                value={this.state.address}
+                                                onChange={this.handleChange('address')}
+                                                margin="normal"
+                                                variant="outlined"
+                                            />
+                                        </div>
 
                                         <TextField
                                             id="outlined-name"
@@ -169,11 +168,11 @@ export default class InputDataPage extends React.Component {
                     </Grid>
                 </div>
                 <div className="input-middle-paper">
-                    <div style={{ paddingTop: '7%' }}>        
+                    <div style={{ paddingTop: '5%' }}>        
                         <Grid container alignItems="center" justify="center" >
-                        <h2 className="input-header"> If you have a flier, upload it here</h2>
+                        <h2 className="input-header-dropbox"> If you have a flier, upload it here</h2>
                         <div className="middle-box">
-                            <Dropzone accept=".pdf"
+                            <Dropzone accept=".cvs"
                                 onDrop={this.onDrop.bind(this)}>
                                 {({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles, rejectedFiles }) => {
                                     let styles = { ...baseStyle }
@@ -187,9 +186,10 @@ export default class InputDataPage extends React.Component {
                                         >
                                             <input {...getInputProps()} />
                                             <div>
-                                                {isDragAccept ? 'Drop' : 'Drag'} files here or click to select files
-                                        </div>
-                                            <p>Only *.pdf file will be accepted</p>
+                                                {/* {isDragAccept ? <p className="small-text-dropbox">Drop</p> : <p className="small-text-dropbox">Drag</p>}  */}
+                                                <p className="small-text-dropbox"> Drag files here or click to select files</p>
+                                            </div>
+                                            <p className="small-text-dropbox">Only *.cvs file will be accepted</p>
                                             <img src={arrow_drop_down} className="drop-logo" alt="arrow_drop_down" />
                                             {isDragReject && <div>Unsupported file type...</div>}
                                         </div>

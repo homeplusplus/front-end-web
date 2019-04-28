@@ -34,7 +34,7 @@ const rejectStyle = {
 export default class About extends React.Component {
     render() {
         return (
-            <div>
+            <div className="input-middle-paper">
             <Grid container direction="column" style={{paddingTop: '5%'}} alignItems="center">
                 <h1 className="about-header">How does it work?</h1>
                 <p className="about-text">Home++ provides real time information about resources and events directly to the phones of the homeless.

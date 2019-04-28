@@ -101,7 +101,7 @@
 
 .input-top-paper{
     height: 500px;
-    background: linear-gradient(-270deg, rgba(231, 229, 212, 0.7), rgba(231, 229, 212, 0.7));
+    background-color: #1b1b1b;
 
 }
 
@@ -109,11 +109,15 @@
     height: 350px;
     max-height: 450px;
     /* background: linear-gradient(-270deg, rgb(26, 126, 219), rgba(81, 230, 205, 0.7), rgb(26, 126, 219)); */
-    background-color: #1b1b1b;
+    background: linear-gradient(-270deg, rgba(231, 229, 212, 0.7), rgba(231, 229, 212, 0.7));
 }
 
 .input-header{
-    color: gray;
+    color: rgb(236, 234, 234);
+}
+
+.input-header-dropbox{
+    color: rgb(7, 6, 6);
 }
 
 .middle-box{
@@ -146,6 +150,11 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+.input-text-field-long{
+    width: 350px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
 .data-container{
     height: 600px;
@@ -171,7 +180,7 @@
 .footer-button{
     height: 40px;
     width: 40px;
-    background: linear-gradient(-270deg, rgb(81, 230, 205, 0.7), rgb(26, 126, 219));
+    background: linear-gradient(-270deg, rgba(12, 19, 18, 0.7), rgb(117, 119, 121));
 }
 
 .copy-footer{
@@ -198,4 +207,10 @@
     border-top-right-radius: 25px;
     border-bottom-left-radius: 25px;
     border-top-left-radius: 25px;
+    background-color: #1b1b1b;
+    color: aliceblue
   }
+
+.small-text-dropbox{
+    color: #1b1b1b;
+}  

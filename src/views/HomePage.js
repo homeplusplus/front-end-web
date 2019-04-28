@@ -44,7 +44,7 @@ export default class HomePage extends React.Component{
                 'content-type': 'application/json'
             },
             method: 'post',
-            url: `http://localhost:3001/api/phone`,
+            url: `https://f6136923.ngrok.io/phone`,
             params: {
                 phone
             }
